@@ -83,14 +83,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (error) throw error
 
     if (data.user) {
-      // Create profile
+      // Create profile with extended fields
       const { error: profileError } = await supabase
         .from('profiles')
         .insert({
           id: data.user.id,
           email,
           role,
+          first_name: '',
+          last_name: '',
+          bio: '',
+          university: '',
+          major: '',
+          organization_name: '',
+          industry: 'Technology',
           created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
         })
       if (profileError) throw profileError
     }

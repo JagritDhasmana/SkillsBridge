@@ -9,7 +9,16 @@ CREATE TABLE public.profiles (
   id UUID PRIMARY KEY REFERENCES auth.users(id),
   email VARCHAR(255) UNIQUE NOT NULL,
   role VARCHAR(20) NOT NULL,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  first_name VARCHAR(100),
+  last_name VARCHAR(100),
+  bio TEXT,
+  university VARCHAR(255),
+  major VARCHAR(255),
+  organization_name VARCHAR(255),
+  industry VARCHAR(100),
+  avatar_url TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 -- Create the projects table

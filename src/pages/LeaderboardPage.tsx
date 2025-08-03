@@ -4,104 +4,270 @@ import { Card, CardContent, CardHeader } from '../components/ui/Card'
 
 const rewards = [
   {
-    name: 'Best Internship Handbook',
-    image: 'https://images.pexels.com/photos/1249626/pexels-photo-1249626.jpeg?auto=compress&cs=tinysrgb&w=400',
-    type: 'Physical Reward',
-  },
-  {
-    name: 'SkillBridge Cap',
-    image: 'https://images.pexels.com/photos/1562477/pexels-photo-1562477.jpeg?auto=compress&cs=tinysrgb&w=400',
+    name: 'SkillBridge T-Shirt',
+    image: 'https://res.cloudinary.com/dbsfkhatc/image/upload/v1754207200/TshirtSB_h8mmcz.jpg',
     type: 'Wearable',
   },
   {
-    name: 'Premium Journal',
-    image: 'https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=400',
-    type: 'Bonus Award',
+    name: 'SkillBridge Phone Cover',
+    image: 'https://res.cloudinary.com/dbsfkhatc/image/upload/v1754207193/PhoneCoverSB_jy6wl0.jpg',
+    type: 'Accessory',
+  },
+  {
+    name: 'SkillBridge Mug',
+    image: 'https://res.cloudinary.com/dbsfkhatc/image/upload/v1754207184/MugSB_wcmefh.jpg',
+    type: 'Accessory',
   },
 ]
 
-const leaderboardData = [
-  {
-    rank: 1,
-    name: 'Sophia Chen',
-    avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100',
-    projects: 12,
-    points: 1250,
-    badge: 'Gold',
-  },
-  {
-    rank: 2,
-    name: 'Ethan Rodriguez',
-    avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100',
-    projects: 10,
-    points: 1180,
-    badge: 'Silver',
-  },
-  {
-    rank: 3,
-    name: 'Maya Johnson',
-    avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100',
-    projects: 9,
-    points: 1050,
-    badge: 'Bronze',
-  },
-  {
-    rank: 4,
-    name: 'Alex Kim',
-    avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100',
-    projects: 8,
-    points: 950,
-    badge: null,
-  },
-  {
-    rank: 5,
-    name: 'Liam Parker',
-    avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100',
-    projects: 7,
-    points: 890,
-    badge: null,
-  },
-  {
-    rank: 6,
-    name: 'Zoe Williams',
-    avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100',
-    projects: 6,
-    points: 820,
-    badge: null,
-  },
-  {
-    rank: 7,
-    name: 'Noah Garcia',
-    avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100',
-    projects: 6,
-    points: 780,
-    badge: null,
-  },
-  {
-    rank: 8,
-    name: 'Isabella Scott',
-    avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100',
-    projects: 5,
-    points: 720,
-    badge: null,
-  },
-  {
-    rank: 9,
-    name: 'Oliver Brown',
-    avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100',
-    projects: 5,
-    points: 680,
-    badge: null,
-  },
-  {
-    rank: 10,
-    name: 'Ava Davis',
-    avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100',
-    projects: 4,
-    points: 640,
-    badge: null,
-  },
-]
+const leaderboardData = {
+  overall: [
+    {
+      rank: 1,
+      name: 'Sophia Chen',
+      avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 12,
+      points: 1250,
+      badge: 'Gold',
+    },
+    {
+      rank: 2,
+      name: 'Ethan Rodriguez',
+      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 10,
+      points: 1180,
+      badge: 'Silver',
+    },
+    {
+      rank: 3,
+      name: 'Maya Johnson',
+      avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 9,
+      points: 1050,
+      badge: 'Bronze',
+    },
+    {
+      rank: 4,
+      name: 'Alex Kim',
+      avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 8,
+      points: 950,
+      badge: null,
+    },
+    {
+      rank: 5,
+      name: 'Liam Parker',
+      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 7,
+      points: 890,
+      badge: null,
+    },
+    {
+      rank: 6,
+      name: 'Zoe Williams',
+      avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 6,
+      points: 820,
+      badge: null,
+    },
+    {
+      rank: 7,
+      name: 'Noah Garcia',
+      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 6,
+      points: 780,
+      badge: null,
+    },
+    {
+      rank: 8,
+      name: 'Isabella Scott',
+      avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 5,
+      points: 720,
+      badge: null,
+    },
+    {
+      rank: 9,
+      name: 'Oliver Brown',
+      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 5,
+      points: 680,
+      badge: null,
+    },
+    {
+      rank: 10,
+      name: 'Ava Davis',
+      avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 4,
+      points: 640,
+      badge: null,
+    },
+  ],
+  month: [
+    {
+      rank: 1,
+      name: 'Maya Johnson',
+      avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 5,
+      points: 580,
+      badge: 'Gold',
+    },
+    {
+      rank: 2,
+      name: 'Alex Kim',
+      avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 4,
+      points: 520,
+      badge: 'Silver',
+    },
+    {
+      rank: 3,
+      name: 'Sophia Chen',
+      avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 4,
+      points: 490,
+      badge: 'Bronze',
+    },
+    {
+      rank: 4,
+      name: 'Liam Parker',
+      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 3,
+      points: 420,
+      badge: null,
+    },
+    {
+      rank: 5,
+      name: 'Zoe Williams',
+      avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 3,
+      points: 380,
+      badge: null,
+    },
+    {
+      rank: 6,
+      name: 'Ethan Rodriguez',
+      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 2,
+      points: 320,
+      badge: null,
+    },
+    {
+      rank: 7,
+      name: 'Isabella Scott',
+      avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 2,
+      points: 290,
+      badge: null,
+    },
+    {
+      rank: 8,
+      name: 'Noah Garcia',
+      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 2,
+      points: 260,
+      badge: null,
+    },
+    {
+      rank: 9,
+      name: 'Oliver Brown',
+      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 1,
+      points: 180,
+      badge: null,
+    },
+    {
+      rank: 10,
+      name: 'Ava Davis',
+      avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 1,
+      points: 120,
+      badge: null,
+    },
+  ],
+  week: [
+    {
+      rank: 1,
+      name: 'Liam Parker',
+      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 2,
+      points: 240,
+      badge: 'Gold',
+    },
+    {
+      rank: 2,
+      name: 'Zoe Williams',
+      avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 2,
+      points: 220,
+      badge: 'Silver',
+    },
+    {
+      rank: 3,
+      name: 'Noah Garcia',
+      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 1,
+      points: 180,
+      badge: 'Bronze',
+    },
+    {
+      rank: 4,
+      name: 'Maya Johnson',
+      avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 1,
+      points: 150,
+      badge: null,
+    },
+    {
+      rank: 5,
+      name: 'Isabella Scott',
+      avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 1,
+      points: 140,
+      badge: null,
+    },
+    {
+      rank: 6,
+      name: 'Alex Kim',
+      avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 1,
+      points: 120,
+      badge: null,
+    },
+    {
+      rank: 7,
+      name: 'Oliver Brown',
+      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 1,
+      points: 100,
+      badge: null,
+    },
+    {
+      rank: 8,
+      name: 'Sophia Chen',
+      avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 0,
+      points: 80,
+      badge: null,
+    },
+    {
+      rank: 9,
+      name: 'Ethan Rodriguez',
+      avatar: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 0,
+      points: 60,
+      badge: null,
+    },
+    {
+      rank: 10,
+      name: 'Ava Davis',
+      avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100',
+      projects: 0,
+      points: 40,
+      badge: null,
+    },
+  ],
+}
 
 export function LeaderboardPage() {
   const [activeTab, setActiveTab] = useState<'overall' | 'month' | 'week'>('overall')
@@ -142,11 +308,11 @@ export function LeaderboardPage() {
           <div className="grid md:grid-cols-3 gap-6">
             {rewards.map((reward, index) => (
               <Card key={index} className="text-center">
-                <CardContent className="p-6">
+                <CardContent className="p-6 pt-8">
                   <img
                     src={reward.image}
                     alt={reward.name}
-                    className="w-20 h-20 mx-auto mb-4 rounded-lg object-cover"
+                    className="w-32 h-32 mx-auto mb-4 rounded-lg object-cover mt-4"
                   />
                   <h3 className="font-medium text-gray-900 mb-1">{reward.name}</h3>
                   <p className="text-sm text-gray-600">{reward.type}</p>
@@ -198,7 +364,7 @@ export function LeaderboardPage() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {leaderboardData.map((student) => (
+                  {leaderboardData[activeTab].map((student) => (
                     <tr key={student.rank} className={getRowStyles(student.rank)}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">

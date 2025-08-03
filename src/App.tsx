@@ -9,6 +9,7 @@ import { OrganizationDashboard } from './pages/OrganizationDashboard'
 import { ProjectsPage } from './pages/ProjectsPage'
 import { ProjectDetail } from './pages/ProjectDetail'
 import { LeaderboardPage } from './pages/LeaderboardPage'
+import { MentorsPage } from './pages/MentorsPage'
 import { MentorProfile } from './pages/MentorProfile'
 import { SettingsPage } from './pages/SettingsPage'
 import { supabase } from './lib/supabase'
@@ -62,6 +63,7 @@ function AppRoutes() {
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/projects/:id" element={<ProjectDetail />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
+        <Route path="/mentors" element={<MentorsPage />} />
         <Route path="/mentors/:id" element={<MentorProfile />} />
         <Route path="/applications" element={<div>Applications Page</div>} />
         <Route path="/messages" element={<div>Messages Page</div>} />

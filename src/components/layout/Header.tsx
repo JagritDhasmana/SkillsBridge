@@ -32,7 +32,7 @@ export function Header() {
             <Link to="/projects" className="text-gray-700 hover:text-blue-600 transition-colors">
               Projects
             </Link>
-            <Link to="/mentors/1" className="text-gray-700 hover:text-blue-600 transition-colors">
+            <Link to="/mentors" className="text-gray-700 hover:text-blue-600 transition-colors">
               Mentors
             </Link>
             <Link to="/leaderboard" className="text-gray-700 hover:text-blue-600 transition-colors">
