@@ -27,49 +27,52 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null)
-      if (session?.user) {
-        fetchUserRole(session.user.id)
-      }
-      setLoading(false)
-    })
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setUser(session?.user ?? null)
-        if (session?.user) {
-          await fetchUserRole(session.user.id)
-        } else {
-          setUserRole(null)
-        }
-        setLoading(false)
-      }
-    )
-
-    return () => subscription.unsubscribe()
-  }, [])
+    const session = supabase.auth.getSession()
+    setUser(session?.user ?? null);
+    if (session?.user) {
+        fetchUserRole(session.user.id);
+    } else {
+        setUserRole(null);
+    }
+    setLoading(false) // <-- Make sure this always runs
+  }, []);
 
   const fetchUserRole = async (userId: string) => {
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('role')
-      .eq('id', userId)
-      .single()
-    
-    if (data && !error) {
-      setUserRole(data.role)
+    if (!supabase) return;
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', userId)
+        .single();
+
+      if (error) {
+        throw error;
+      }
+
+      if (data) {
+        setUserRole(data.role);
+      }
+    } catch (error) {
+      console.error('Error fetching user role:', error);
+      setUserRole(null);
     }
-  }
+  };
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     })
     if (error) throw error
+
+    // Update user and userRole after sign in
+    setUser(data.user)
+    if (data.user) {
+      await fetchUserRole(data.user.id)
+    } else {
+      setUserRole(null)
+    }
   }
 
   const signUp = async (email: string, password: string, role: 'student' | 'organization') => {

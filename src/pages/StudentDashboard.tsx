@@ -1,64 +1,43 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Briefcase, Clock, MapPin, Users } from 'lucide-react'
 import { Button } from '../components/ui/Button'
 import { Card, CardContent, CardHeader } from '../components/ui/Card'
 import { Sidebar } from '../components/layout/Sidebar'
-
-const projects = [
-  {
-    id: 1,
-    title: 'Develop a Marketing Strategy for a New Product Launch',
-    organization: 'TechStart Inc.',
-    mentor: 'Sarah Johnson',
-    duration: '4 weeks',
-    skills: ['Marketing Strategy', 'Market Research', 'Content Creation'],
-    description: 'Help our startup develop a comprehensive marketing strategy for our new product launch.',
-    applicants: 12,
-    type: 'Remote',
-  },
-  {
-    id: 2,
-    title: 'Analyze Customer Feedback for Product Improvement',
-    organization: 'GreenTech Solutions',
-    mentor: 'David Chen',
-    duration: '3 weeks',
-    skills: ['Data Analysis', 'Customer Research', 'Excel'],
-    description: 'Analyze customer feedback data to provide insights for product improvement.',
-    applicants: 8,
-    type: 'Hybrid',
-  },
-  {
-    id: 3,
-    title: 'Create a Social Media Campaign for a New Product Launch',
-    organization: 'EcoFriendly Co.',
-    mentor: 'Emily Rodriguez',
-    duration: '2 weeks',
-    skills: ['Social Media', 'Content Creation', 'Digital Marketing'],
-    description: 'Design and implement a social media campaign for our eco-friendly product launch.',
-    applicants: 15,
-    type: 'Remote',
-  },
-]
-
-const applications = [
-  {
-    id: 1,
-    project: 'Develop a Mobile App for Local Community Events',
-    organization: 'Community Connect',
-    status: 'Under Review',
-    appliedDate: '2 days ago',
-  },
-  {
-    id: 2,
-    project: 'Website Redesign Project',
-    organization: 'Local NGO',
-    status: 'Accepted',
-    appliedDate: '1 week ago',
-  },
-]
+import { supabase } from '../lib/supabase'
 
 export function StudentDashboard() {
+  const [projects, setProjects] = useState<any[]>([])
+  const [applications, setApplications] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!supabase) return;
+      setLoading(true);
+      try {
+        const { data: projectsData, error: projectsError } = await supabase
+          .from('projects')
+          .select('*')
+          .limit(3);
+        if (projectsError) throw projectsError;
+        setProjects(projectsData || []);
+
+        const { data: applicationsData, error: applicationsError } = await supabase
+          .from('applications')
+          .select('*, projects(*)')
+          .limit(2);
+        if (applicationsError) throw applicationsError;
+        setApplications(applicationsData || []);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <div className="flex h-screen bg-gray-50">
       <Sidebar />

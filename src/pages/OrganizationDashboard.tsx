@@ -1,70 +1,43 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Plus, Users, Clock, Eye } from 'lucide-react'
 import { Button } from '../components/ui/Button'
 import { Card, CardContent, CardHeader } from '../components/ui/Card'
 import { Sidebar } from '../components/layout/Sidebar'
-
-const projects = [
-  {
-    id: 1,
-    title: 'Marketing Strategy Development',
-    description: 'Help develop a comprehensive marketing strategy for our new product launch.',
-    skills: ['Marketing', 'Strategy', 'Research'],
-    duration: '4 weeks',
-    mentor: 'Sarah Johnson',
-    applications: 12,
-    status: 'Active',
-    postedDate: '3 days ago',
-  },
-  {
-    id: 2,
-    title: 'Website Redesign Project',
-    description: 'Redesign our company website with modern UI/UX principles.',
-    skills: ['UI/UX Design', 'Web Design', 'Figma'],
-    duration: '6 weeks',
-    mentor: 'David Chen',
-    applications: 8,
-    status: 'Active',
-    postedDate: '1 week ago',
-  },
-]
-
-const applicants = [
-  {
-    id: 1,
-    name: 'Emily Rodriguez',
-    project: 'Marketing Strategy Development',
-    skills: ['Marketing', 'Data Analysis', 'Content Creation'],
-    experience: '2 years',
-    rating: 4.8,
-    appliedDate: '2 days ago',
-    resumeUrl: '#',
-  },
-  {
-    id: 2,
-    name: 'Michael Chen',
-    project: 'Marketing Strategy Development',
-    skills: ['Digital Marketing', 'SEO', 'Social Media'],
-    experience: '1 year',
-    rating: 4.6,
-    appliedDate: '1 day ago',
-    resumeUrl: '#',
-  },
-  {
-    id: 3,
-    name: 'Sarah Kim',
-    project: 'Website Redesign Project',
-    skills: ['UI/UX', 'Figma', 'Prototyping'],
-    experience: '3 years',
-    rating: 4.9,
-    appliedDate: '3 hours ago',
-    resumeUrl: '#',
-  },
-]
+import { supabase } from '../lib/supabase'
 
 export function OrganizationDashboard() {
   const [activeTab, setActiveTab] = useState<'projects' | 'applicants' | 'post'>('projects')
-  const [showPostForm, setShowPostForm] = useState(false)
+  const [projects, setProjects] = useState<any[]>([])
+  const [applicants, setApplicants] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!supabase) return;
+      setLoading(true);
+      try {
+        const { data: projectsData, error: projectsError } = await supabase
+          .from('projects')
+          .select('*')
+          .limit(3);
+        if (projectsError) throw projectsError;
+        setProjects(projectsData || []);
+
+        const { data: applicantsData, error: applicantsError } = await supabase
+          .from('applications')
+          .select('*, profiles(*), projects(*)')
+          .limit(5);
+        if (applicantsError) throw applicantsError;
+        setApplicants(applicantsData || []);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const tabs = [
     { key: 'projects', label: 'Active Projects', count: projects.length },

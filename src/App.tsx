@@ -11,6 +11,7 @@ import { ProjectDetail } from './pages/ProjectDetail'
 import { LeaderboardPage } from './pages/LeaderboardPage'
 import { MentorProfile } from './pages/MentorProfile'
 import { SettingsPage } from './pages/SettingsPage'
+import { supabase } from './lib/supabase'
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth()
@@ -62,6 +63,11 @@ function AppRoutes() {
         <Route path="/projects/:id" element={<ProjectDetail />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
         <Route path="/mentors/:id" element={<MentorProfile />} />
+        <Route path="/applications" element={<div>Applications Page</div>} />
+        <Route path="/messages" element={<div>Messages Page</div>} />
+        <Route path="/profile" element={<div>Profile Page</div>} />
+        <Route path="/org-projects" element={<div>Organization Projects Page</div>} />
+        <Route path="/applicants" element={<div>Applicants Page</div>} />
         
         <Route path="/settings" element={
           <ProtectedRoute>
@@ -77,6 +83,29 @@ function AppRoutes() {
 }
 
 function App() {
+  if (!supabase) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="max-w-2xl mx-auto text-center p-8 bg-white rounded-lg shadow-md">
+          <h1 className="text-2xl font-bold text-red-600 mb-4">Configuration Error</h1>
+          <p className="text-gray-700">
+            Supabase URL and anonymous key are not configured. Please create a '.env.local' file in the root of the project and add the following variables:
+          </p>
+          <pre className="mt-4 p-4 bg-gray-100 rounded text-left text-sm">
+            <code>
+              VITE_SUPABASE_URL=your_supabase_url_here
+              <br />
+              VITE_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+            </code>
+          </pre>
+          <p className="text-gray-700 mt-4">
+            You can get these from your Supabase project settings.
+          </p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <AuthProvider>
       <Router>
