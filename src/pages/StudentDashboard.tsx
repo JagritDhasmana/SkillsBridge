@@ -227,7 +227,7 @@ export function StudentDashboard() {
                             </div>
                             <div className="ml-4 flex flex-col items-end">
                               <Link to={`/projects/${project.id}`}>
-                                <Button size="sm">Apply</Button>
+                                <Button size="sm">Go to</Button>
                               </Link>
                               <span className="text-sm text-gray-500 mt-2 flex items-center">
                                 <Users className="w-4 h-4 mr-1" />

@@ -1,6 +1,6 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
-import { Clock, MapPin, Users, Calendar, Star, Briefcase } from 'lucide-react'
+import { useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { Clock, MapPin, Users, Calendar, Star, Briefcase, ArrowLeft, Check, Bookmark } from 'lucide-react'
 import { Button } from '../components/ui/Button'
 import { Card, CardContent, CardHeader } from '../components/ui/Card'
 
@@ -53,10 +53,54 @@ The ideal candidate should have a strong interest in marketing, excellent resear
 
 export function ProjectDetail() {
   const { id } = useParams()
+  const navigate = useNavigate()
+  const [isApplied, setIsApplied] = useState(false)
+  const [isSaved, setIsSaved] = useState(false)
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false)
+
+  const handleApplyToProject = () => {
+    setIsApplied(true)
+    setShowSuccessMessage(true)
+    setTimeout(() => setShowSuccessMessage(false), 3000)
+  }
+
+  const handleSaveProject = () => {
+    setIsSaved(!isSaved)
+  }
+
+  const handleViewProfile = () => {
+    navigate('/mentors/1')
+  }
+
+  const handleVisitWebsite = () => {
+    window.open(projectData.organization.website, '_blank')
+  }
+
+  const handleGoBack = () => {
+    navigate('/projects')
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Back Button and Success Message */}
+        <div className="mb-6">
+          <Button 
+            variant="outline" 
+            onClick={handleGoBack}
+            className="mb-4"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Projects
+          </Button>
+          
+          {showSuccessMessage && (
+            <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg flex items-center">
+              <Check className="w-5 h-5 mr-2" />
+              Successfully applied to this project! Check your applications page for updates.
+            </div>
+          )}
+        </div>
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
@@ -110,11 +154,28 @@ export function ProjectDetail() {
                 </div>
 
                 <div className="flex gap-4">
-                  <Button size="lg" className="flex-1 sm:flex-none">
-                    Apply for This Project
+                  <Button 
+                    size="lg" 
+                    className="flex-1 sm:flex-none"
+                    onClick={handleApplyToProject}
+                    disabled={isApplied}
+                  >
+                    {isApplied ? (
+                      <>
+                        <Check className="w-4 h-4 mr-2" />
+                        Applied
+                      </>
+                    ) : (
+                      'Apply for This Project'
+                    )}
                   </Button>
-                  <Button variant="outline" size="lg">
-                    Save Project
+                  <Button 
+                    variant="outline" 
+                    size="lg"
+                    onClick={handleSaveProject}
+                  >
+                    <Bookmark className={`w-4 h-4 mr-2 ${isSaved ? 'fill-current' : ''}`} />
+                    {isSaved ? 'Saved' : 'Save Project'}
                   </Button>
                 </div>
               </CardContent>
@@ -229,7 +290,12 @@ export function ProjectDetail() {
                       <p className="font-medium">{projectData.organization.employees}</p>
                     </div>
                   </div>
-                  <Button variant="outline" size="sm" className="w-full">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-full"
+                    onClick={handleVisitWebsite}
+                  >
                     Visit Website
                   </Button>
                 </div>
@@ -268,7 +334,12 @@ export function ProjectDetail() {
                     </div>
                     <span className="text-sm text-gray-600">{projectData.mentor.experience}</span>
                   </div>
-                  <Button variant="outline" size="sm" className="w-full">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-full"
+                    onClick={handleViewProfile}
+                  >
                     View Profile
                   </Button>
                 </div>

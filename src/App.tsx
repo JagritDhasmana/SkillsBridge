@@ -11,6 +11,8 @@ import { ProjectDetail } from './pages/ProjectDetail'
 import { LeaderboardPage } from './pages/LeaderboardPage'
 import { MentorsPage } from './pages/MentorsPage'
 import { MentorProfile } from './pages/MentorProfile'
+import { ApplicationsPage } from './pages/ApplicationsPage'
+import { MessagesPage } from './pages/MessagesPage'
 import { SettingsPage } from './pages/SettingsPage'
 import { supabase } from './lib/supabase'
 
@@ -65,8 +67,16 @@ function AppRoutes() {
         <Route path="/leaderboard" element={<LeaderboardPage />} />
         <Route path="/mentors" element={<MentorsPage />} />
         <Route path="/mentors/:id" element={<MentorProfile />} />
-        <Route path="/applications" element={<div>Applications Page</div>} />
-        <Route path="/messages" element={<div>Messages Page</div>} />
+        <Route path="/applications" element={
+          <ProtectedRoute>
+            <ApplicationsPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/messages" element={
+          <ProtectedRoute>
+            <MessagesPage />
+          </ProtectedRoute>
+        } />
         <Route path="/profile" element={<div>Profile Page</div>} />
         <Route path="/org-projects" element={<div>Organization Projects Page</div>} />
         <Route path="/applicants" element={<div>Applicants Page</div>} />
