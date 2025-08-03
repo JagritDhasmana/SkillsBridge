@@ -247,20 +247,20 @@ export function MessagesPage() {
     <div className="flex h-screen bg-gray-50">
       <Sidebar />
       
-      <main className="flex-1 overflow-hidden">
+      <main className="flex-1 overflow-hidden animate-fade-in">
         <div className="h-full flex">
           {/* Conversations List */}
-          <div className="w-1/3 bg-white border-r border-gray-200 flex flex-col">
+          <div className="w-1/3 bg-white border-r border-gray-200 flex flex-col animate-slide-in-left">
             <div className="p-6 border-b border-gray-200">
-              <h1 className="text-2xl font-bold text-gray-900 mb-4">Messages</h1>
-              <div className="relative">
+              <h1 className="text-2xl font-bold text-gray-900 mb-4 animate-slide-in-down">Messages</h1>
+              <div className="relative animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   type="text"
                   placeholder="Search conversations..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                 />
               </div>
             </div>
@@ -272,15 +272,16 @@ export function MessagesPage() {
                 </div>
               ) : filteredConversations.length > 0 ? (
                 <div className="space-y-1 p-2">
-                  {filteredConversations.map((conversation) => (
+                  {filteredConversations.map((conversation, index) => (
                     <div
                       key={conversation.id}
                       onClick={() => handleSelectConversation(conversation)}
-                      className={`p-4 rounded-lg cursor-pointer transition-colors ${
+                      className={`p-4 rounded-lg cursor-pointer transition-all duration-300 hover:scale-105 animate-fade-in-up ${
                         selectedConversation?.id === conversation.id
                           ? 'bg-blue-50 border-l-4 border-blue-600'
                           : 'hover:bg-gray-50'
                       }`}
+                      style={{ animationDelay: `${index * 100}ms` }}
                     >
                       <div className="flex items-start justify-between mb-2">
                         <div className="flex items-center space-x-3">

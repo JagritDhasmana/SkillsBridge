@@ -205,9 +205,9 @@ export function ApplicationsPage() {
     <div className="flex h-screen bg-gray-50">
       <Sidebar />
       
-      <main className="flex-1 overflow-auto">
+      <main className="flex-1 overflow-auto animate-fade-in">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="mb-8">
+          <div className="mb-8 animate-slide-in-down">
             <h1 className="text-3xl font-bold text-gray-900 mb-4">My Applications</h1>
             <p className="text-gray-600">Track the status of your project applications and manage your opportunities.</p>
           </div>

@@ -5,17 +5,19 @@ interface CardProps {
   children: React.ReactNode
   className?: string
   onClick?: () => void
+  style?: React.CSSProperties
 }
 
-export function Card({ children, className, onClick }: CardProps) {
+export function Card({ children, className, onClick, style }: CardProps) {
   return (
     <div
       className={cn(
-        'bg-white rounded-lg border border-gray-200 shadow-sm',
-        onClick && 'cursor-pointer hover:shadow-md transition-shadow',
+        'bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 animate-fade-in-up',
+        onClick && 'cursor-pointer hover:scale-105',
         className
       )}
       onClick={onClick}
+      style={style}
     >
       {children}
     </div>

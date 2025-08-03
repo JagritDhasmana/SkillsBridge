@@ -41,21 +41,22 @@ export function Sidebar() {
   const items = userRole === 'student' ? studentItems : orgItems
 
   return (
-    <aside className="w-64 bg-white border-r border-gray-200 h-full">
+    <aside className="w-64 bg-white border-r border-gray-200 h-full animate-slide-in-left">
       <div className="p-6">
         <nav className="space-y-2">
-          {items.map((item) => (
+          {items.map((item, index) => (
             <Link
               key={item.href}
               to={item.href}
               className={cn(
-                'flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+                'flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-md',
                 location.pathname === item.href
-                  ? 'bg-blue-50 text-blue-700'
-                  : 'text-gray-700 hover:bg-gray-50'
+                  ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-600 animate-pulse-subtle'
+                  : 'text-gray-700 hover:bg-gray-50 hover:translate-x-1'
               )}
+              style={{ animationDelay: `${index * 100}ms` }}
             >
-              {item.icon}
+              <span className="transition-transform duration-300 group-hover:scale-110">{item.icon}</span>
               <span>{item.label}</span>
             </Link>
           ))}

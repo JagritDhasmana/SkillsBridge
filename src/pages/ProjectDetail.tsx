@@ -81,21 +81,21 @@ export function ProjectDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 animate-fade-in">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back Button and Success Message */}
-        <div className="mb-6">
+        <div className="mb-6 animate-slide-in-down">
           <Button 
             variant="outline" 
             onClick={handleGoBack}
-            className="mb-4"
+            className="mb-4 hover:scale-110 transition-all duration-300"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Projects
           </Button>
           
           {showSuccessMessage && (
-            <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg flex items-center">
+            <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg flex items-center animate-fade-in-up">
               <Check className="w-5 h-5 mr-2" />
               Successfully applied to this project! Check your applications page for updates.
             </div>
@@ -105,13 +105,13 @@ export function ProjectDetail() {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
             {/* Project Header */}
-            <Card>
+            <Card className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
               <CardContent className="p-8">
                 <div className="flex items-start gap-6 mb-6">
                   <img
                     src={projectData.organization.logo}
                     alt={projectData.organization.name}
-                    className="w-16 h-16 rounded-lg object-cover"
+                    className="w-16 h-16 rounded-lg object-cover hover:scale-110 transition-transform duration-300 animate-float"
                   />
                   <div className="flex-1">
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -143,10 +143,11 @@ export function ProjectDetail() {
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {projectData.skills.map((skill) => (
+                  {projectData.skills.map((skill, index) => (
                     <span
                       key={skill}
-                      className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm"
+                      className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm hover:bg-blue-200 hover:scale-105 transition-all duration-200 animate-fade-in"
+                      style={{ animationDelay: `${index * 100}ms` }}
                     >
                       {skill}
                     </span>

@@ -167,8 +167,8 @@ export function StudentDashboard() {
       <Sidebar />
       
       <main className="flex-1 overflow-auto">
-        <div className="p-8">
-          <div className="mb-8">
+        <div className="p-8 animate-fade-in">
+          <div className="mb-8 animate-slide-in-down">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome back, {getUserName()}!</h1>
             <p className="text-gray-600">Discover new projects and continue building your skills.</p>
           </div>
@@ -177,11 +177,11 @@ export function StudentDashboard() {
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-8">
               {/* Recommended Projects */}
-              <div>
+              <div className="animate-slide-in-left">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-semibold text-gray-900">Recommended Projects</h2>
                   <Link to="/projects">
-                    <Button variant="outline" size="sm">View All</Button>
+                    <Button variant="outline" size="sm" className="hover:scale-110 transition-transform duration-300">View All</Button>
                   </Link>
                 </div>
                 
@@ -191,12 +191,12 @@ export function StudentDashboard() {
                       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
                     </div>
                   ) : (
-                    projects.map((project) => (
-                      <Card key={project.id} className="hover:shadow-md transition-shadow">
+                    projects.map((project, index) => (
+                      <Card key={project.id} className="hover:shadow-md transition-all duration-300 hover:scale-102 animate-fade-in-up" style={{ animationDelay: `${index * 200}ms` }}>
                         <CardHeader>
                           <div className="flex items-start justify-between">
                             <div className="flex-1">
-                              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                              <h3 className="text-lg font-semibold text-gray-900 mb-2 hover:text-blue-600 transition-colors duration-200">
                                 {project.title}
                               </h3>
                               <div className="flex items-center space-x-4 text-sm text-gray-600 mb-3">
@@ -218,7 +218,8 @@ export function StudentDashboard() {
                                 {(project.skills || []).map((skill: string, index: number) => (
                                   <span
                                     key={`${skill}-${index}`}
-                                    className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm"
+                                    className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm hover:bg-blue-200 hover:scale-105 transition-all duration-200 animate-fade-in"
+                                    style={{ animationDelay: `${index * 100}ms` }}
                                   >
                                     {skill}
                                   </span>
@@ -244,9 +245,9 @@ export function StudentDashboard() {
             </div>
 
             {/* Sidebar Content */}
-            <div className="space-y-6">
+            <div className="space-y-6 animate-slide-in-right">
               {/* Application Status */}
-              <Card>
+              <Card className="hover:scale-105 transition-transform duration-300">
                 <CardHeader>
                   <h3 className="text-lg font-semibold text-gray-900">Application Status</h3>
                 </CardHeader>
@@ -257,9 +258,9 @@ export function StudentDashboard() {
                         <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
                       </div>
                     ) : applications.length > 0 ? (
-                      applications.map((app) => (
-                        <div key={app.id} className="border-b border-gray-200 last:border-0 pb-4 last:pb-0">
-                          <h4 className="font-medium text-gray-900 mb-1">
+                      applications.map((app, index) => (
+                        <div key={app.id} className="border-b border-gray-200 last:border-0 pb-4 last:pb-0 hover:bg-gray-50 transition-all duration-200 rounded-lg p-2 animate-fade-in-up" style={{ animationDelay: `${index * 150}ms` }}>
+                          <h4 className="font-medium text-gray-900 mb-1 hover:text-blue-600 transition-colors duration-200">
                             {app.project || app.projects?.title || 'Project Application'}
                           </h4>
                           <p className="text-sm text-gray-600 mb-2">
@@ -299,23 +300,23 @@ export function StudentDashboard() {
               </Card>
 
               {/* Quick Stats */}
-              <Card>
+              <Card className="hover:scale-105 transition-transform duration-300">
                 <CardHeader>
                   <h3 className="text-lg font-semibold text-gray-900">Your Progress</h3>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center hover:bg-gray-50 transition-colors duration-200 rounded p-2 animate-fade-in-right" style={{ animationDelay: '100ms' }}>
                       <span className="text-gray-600">Projects Completed</span>
-                      <span className="font-semibold">3</span>
+                      <span className="font-semibold text-blue-600">3</span>
                     </div>
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center hover:bg-gray-50 transition-colors duration-200 rounded p-2 animate-fade-in-right" style={{ animationDelay: '200ms' }}>
                       <span className="text-gray-600">Current Rank</span>
-                      <span className="font-semibold">#47</span>
+                      <span className="font-semibold text-green-600">#47</span>
                     </div>
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center hover:bg-gray-50 transition-colors duration-200 rounded p-2 animate-fade-in-right" style={{ animationDelay: '300ms' }}>
                       <span className="text-gray-600">Points Earned</span>
-                      <span className="font-semibold">245</span>
+                      <span className="font-semibold text-purple-600">245</span>
                     </div>
                   </div>
                   <Link to="/leaderboard">
