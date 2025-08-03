@@ -25,11 +25,9 @@ export function Sidebar() {
 
   const studentItems: SidebarItem[] = [
     { icon: <Home className="w-5 h-5" />, label: 'Home', href: '/dashboard' },
-    { icon: <Briefcase className="w-5 h-5" />, label: 'Projects', href: '/projects' },
     { icon: <FileText className="w-5 h-5" />, label: 'Applications', href: '/applications' },
     { icon: <MessageSquare className="w-5 h-5" />, label: 'Messages', href: '/messages' },
-    { icon: <Trophy className="w-5 h-5" />, label: 'Leaderboard', href: '/leaderboard' },
-    { icon: <User className="w-5 h-5" />, label: 'Profile', href: '/profile' },
+    { icon: <User className="w-5 h-5" />, label: 'Profile', href: '/settings' },
   ]
 
   const orgItems: SidebarItem[] = [
@@ -37,7 +35,7 @@ export function Sidebar() {
     { icon: <Briefcase className="w-5 h-5" />, label: 'My Projects', href: '/org-projects' },
     { icon: <Users className="w-5 h-5" />, label: 'Applicants', href: '/applicants' },
     { icon: <MessageSquare className="w-5 h-5" />, label: 'Messages', href: '/messages' },
-    { icon: <User className="w-5 h-5" />, label: 'Profile', href: '/profile' },
+    { icon: <User className="w-5 h-5" />, label: 'Profile', href: '/settings' },
   ]
 
   const items = userRole === 'student' ? studentItems : orgItems

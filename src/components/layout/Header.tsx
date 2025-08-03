@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { User, LogOut, Settings } from 'lucide-react'
+import { User, LogOut } from 'lucide-react'
 import { Button } from '../ui/Button'
 import { useAuth } from '../../contexts/AuthContext'
 
@@ -15,6 +15,20 @@ export function Header() {
     } catch (error) {
       console.error('Error signing out:', error)
     }
+  }
+
+  // Get username from user data
+  const getUserName = () => {
+    if (user?.user_metadata?.first_name) {
+      return user.user_metadata.first_name
+    }
+    if (user?.user_metadata?.full_name) {
+      return user.user_metadata.full_name.split(' ')[0]
+    }
+    if (user?.email) {
+      return user.email.split('@')[0]
+    }
+    return 'User'
   }
 
   return (
@@ -43,12 +57,6 @@ export function Header() {
           <div className="flex items-center space-x-4">
             {user ? (
               <div className="flex items-center space-x-3">
-                <Link to="/settings">
-                  <Button variant="ghost" size="sm">
-                    <Settings className="w-4 h-4 mr-2" />
-                    Settings
-                  </Button>
-                </Link>
                 <Link to={userRole === 'student' ? '/dashboard' : '/org-dashboard'}>
                   <Button variant="ghost" size="sm">
                     <User className="w-4 h-4 mr-2" />
@@ -57,7 +65,7 @@ export function Header() {
                 </Link>
                 <Button variant="ghost" size="sm" onClick={handleSignOut}>
                   <LogOut className="w-4 h-4 mr-2" />
-                  Sign Out
+                  {getUserName()} / Sign Out
                 </Button>
               </div>
             ) : (
